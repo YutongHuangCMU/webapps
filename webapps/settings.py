@@ -57,12 +57,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# EMAIL_HOST = 'smtp.163.com'
-# EMAIL_HOST_USER = 'evelynhuangyt@163.com'
-# EMAIL_HOST_PASSWORD = 'WCZhyt930816'
-# EMAIL_USE_TLS = True
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'cmu.evelyn.huang@gmail.com'
+EMAIL_HOST_PASSWORD = 'WCZhyt930816'
+DEFAULT_FROM_EMAIL = 'cmu.evelyn.huang@gmail.com'
+SERVER_EMAIL = 'cmu.evelyn.huang@gmail.com'
 
 ROOT_URLCONF = 'webapps.urls'
 

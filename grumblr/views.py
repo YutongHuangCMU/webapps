@@ -49,14 +49,17 @@ def signup(request):
     http://%s%s
     """ % (request.get_host(),
            reverse('verify', args=(request.user.username, token)))
-    send_mail(subject="Verify the change of your email address",
+    send_mail(subject="Grumblr - Verify your email address",
               message=email_body,
               #from_email="yh1@andrew.cmu.edu",
-              from_email="evelynhuangyt@163.com",
+              from_email="cmu.evelyn.huang@gmail.com",
               recipient_list=[request.user.email],
-              fail_silently=False,)
-
-    return redirect('global')
+              fail_silently=False,
+    )
+    text = "One email has been sent to your email address. Please click the link in the email to verify your email address."
+    context['text'] = text
+    
+    return render(request, 'registration.html', context)
 
 def forgetpassword(request):
     context={}
@@ -79,7 +82,7 @@ def forgetpassword(request):
     send_mail(subject="Verify the change of your password",
               message=email_body,
               #from_email="yh1@andrew.cmu.edu",
-              from_email="evelynhuangyt@163.com",
+              from_email="cmu.evelyn.huang@gmail.com",
               recipient_list=[user.email],
               fail_silently=False,)
     text = "One email has been sent to your email address. Please click the link in the email to reset your password."
