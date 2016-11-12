@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 #SECRET_KEY = 'wr^299+27$&%y28xjvpluz_cobf@h00$)_ek&mus6#gre-+zpn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['0.0.0.0','yh1-webapp.herokuapp.com']
 
@@ -184,3 +184,8 @@ STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+
+
+#deployment
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
