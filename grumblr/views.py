@@ -40,8 +40,8 @@ def signup(request):
     new_profile.save()
 
     new_user1 = authenticate(username=form.cleaned_data['username1'],
-                            password=form.cleaned_data['password'])
-    login(request, new_user1)
+                             password=form.cleaned_data['password'])
+    # login(request, new_user1)
 
     token = default_token_generator.make_token(request.user)
     email_body = """
@@ -53,12 +53,12 @@ def signup(request):
               message=email_body,
               #from_email="yh1@andrew.cmu.edu",
               from_email="cmu.evelyn.huang@gmail.com",
-              recipient_list=[request.user.email],
+              recipient_list=[new_user.email],
               fail_silently=False,
     )
     text = "One email has been sent to your email address. Please click the link in the email to verify your email address."
     context['text'] = text
-    
+
     return render(request, 'registration.html', context)
 
 def forgetpassword(request):
@@ -87,7 +87,6 @@ def forgetpassword(request):
               fail_silently=False,)
     text = "One email has been sent to your email address. Please click the link in the email to reset your password."
     context['text'] = text
-    profile.token_password = token
     profile.save()
     return render(request,'forgetpassword.html',context)
 
@@ -97,8 +96,8 @@ def reset(request, name, token):
     context['name'] = name
     user = User.objects.get(username__exact=name)
     if request.method == 'GET':
-        profile = Profile.objects.get(user=user)
-        if profile.token_password == token:
+        user = User.objects.get(username=name)
+        if default_token_generator.check_token(user, token):
             context['form'] = PasswordForm()
             return render(request, 'resetpassword.html', context)
         else:
@@ -108,7 +107,6 @@ def reset(request, name, token):
     context['form'] = form
     if not form.is_valid():
         return render(request, 'resetpassword.html', context)
-
 
     user.set_password(form.cleaned_data['password1'])
     user.save()
@@ -296,7 +294,12 @@ def get_photo(request, name):
     return HttpResponse(profile.photo, content_type=content_type1)
 
 def verify_email(request, name, token):
-    return redirect(reverse('global'))
+    user = User.objects.get(username=name)
+    if default_token_generator.check_token(user, token):
+        login(request, user)
+        return redirect(reverse('global'))
+    else:
+        raise Http404("The token doesn't match!")
 
 # def confirm_password(request, name, token):
 #     return redirect(reverse('change_password', kwargs={'name':name}))

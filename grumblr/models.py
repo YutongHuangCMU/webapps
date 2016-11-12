@@ -96,7 +96,6 @@ class Profile(models.Model):
     age = models.IntegerField(default=0,blank=True)
     short_bio = models.TextField(max_length=420, blank=True)
     photo = models.ImageField(upload_to='profile-photo')
-    token_password = models.CharField(max_length=200, blank=True)
     followings = models.ManyToManyField(User,related_name="followings", blank=True)
 
     def __unicode__(self):
