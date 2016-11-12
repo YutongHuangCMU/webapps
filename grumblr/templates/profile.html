@@ -1,0 +1,36 @@
+{% extends "afterloginbase.html" %}
+{% block title %}Grumblr - profile{% endblock %}
+{% block content %}
+<div class="row">
+<div class="col-sm-4 col-sm-offset-4">
+{% block form1 %}
+    <form enctype="multipart/form-data" action="{% url 'profile' user.username %}" method="POST">
+      <table align="center">
+      {% if form1.photo.value %}
+      <tr><td align="center"><img src="{% url 'photo' id %}" class="img-circle" alt="{{form1.first_name.value}} {{form1.last_name.value}}" height="100" width="100"></td></tr>
+      {% endif %}
+      <tr><td align="center"><h2 class="form-signin-heading">Profile</h2></td></tr>
+
+      {% for field in form1.visible_fields %}
+      <tr><td align="center"><h3 class="form-signin-heading" style = "color:#f75252">{{field.errors}}</h3></td></tr>
+      <tr><td align="left">{{field.label}}:</td></tr>
+      <tr><td align="center">{{field}}</td></tr>
+      {% endfor %}
+      <tr><td align="center"><br><button class="btn btn-lg btn-default" name="btn-profile" value="btn-profile">Submit</button></td></tr>
+      {% csrf_token %}
+      </table>
+    </form>
+    {% endblock %}
+    {% block form2 %}
+
+    <form class="form-signin" action="{% url 'change_password' id %}" method="GET">
+      <table align="center">
+        <tr><td align="center"><br><button class="btn btn-lg btn-default" name="btn-password" value="btn-password">Change password</button></td></tr>
+      </table>
+    </form>
+
+    {% endblock %}
+
+</div>
+</div>
+  {% endblock %}

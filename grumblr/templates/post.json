@@ -1,0 +1,5 @@
+{
+  "id":{{post.id}},
+  "com_form":"{{com_form}}",
+  "html":"{{post.html|safe}}"
+}

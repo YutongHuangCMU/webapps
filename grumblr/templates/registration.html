@@ -1,0 +1,18 @@
+{% extends "beforeloginbase.html" %}
+
+{% block title %}Grumblr - registration{% endblock %}
+{% block form %}
+    <form class="form-signin" action="{% url 'registration' %}" method="POST">
+      <h2 class="form-signin-heading">Join us in 1 minute!</h2>
+      <h3 class="form-signin-heading" style = "color:#f75252">{% for err in form.non_field_errors %}{{err}}{% endfor %}</h3>
+      {% for field in form.visible_fields %}
+      <h3 class="form-signin-heading" style = "color:#f75252">{{field.errors}}</h3>
+      {{field}}
+      {% endfor %}
+      <label><a href="{% url 'auth_views.login' %}">Already have an account? Click here to sign in!</a></label>
+      <p class="lead">
+        <button class="btn btn-lg btn-default" name="btn-signin" value="btn-signin">Sign up</button>
+      </p>
+      {% csrf_token %}
+    </form>
+{% endblock %}

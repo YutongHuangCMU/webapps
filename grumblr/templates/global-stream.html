@@ -1,0 +1,47 @@
+{% extends "afterloginbase.html" %}
+{% block title %}Grumblr - global stream{% endblock %}
+{% block nav %}
+<li class="active"><a href="{% url 'global' %}">Global</a></li>
+<li><a href="{% url 'following' %}">Following</a></li>
+<li><a href="{% url 'homepage' user.username %}">Homepage</a></li>
+{% endblock %}
+{% block jumbotron %}
+  	<div class="jumbotron">
+      <div class="container">
+        <h2 class="display-3">Welcome to grumblr!</h2>
+        <label class="display-3">Start sharing your mind from here!</label>
+        <form action="{% url 'global' %}" method="POST">
+          <h3 class="form-signin-heading">{% for err in form.non_field_errors %}{{err}}{% endfor %}</h3>
+          {% for field in form.visible_fields %}
+          <h3 class="form-signin-heading">{{field.errors}}</h3>
+          {{field}}
+          {% endfor %}
+        <br>
+        <button id="btn-post" class="btn-post">Post</button>
+        <hr class="m-y-2">
+        {% csrf_token %}
+      </form>
+      </div>
+    </div>
+{% endblock %}
+{% block content%}
+    <div class="row">
+      <div class="col-sm-3 col-sm-offset-1 no-float sidebar-offcanvas"  id="sidebar" >
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action list-group-item-success">All</a>
+          <a href="#" class="list-group-item list-group-item-action list-group-item-info">Life</a>
+          <a href="#" class="list-group-item list-group-item-action list-group-item-warning">Academic</a>
+          <a href="#" class="list-group-item list-group-item-action list-group-item-danger">Work</a>
+        </div>
+      </div><!--/.sidebar-offcanvas-->
+<p id="test"></p>
+<div class="col-sm-7">
+  <ol id="post-list"></ol>
+  </div>
+
+</div>
+{% endblock %}
+{% block script %}
+{% load static %}
+  <script src="{% static 'grumblr/js/global.js' %}" type="text/javascript"></script>
+{% endblock %}

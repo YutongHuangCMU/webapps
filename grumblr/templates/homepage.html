@@ -1,0 +1,56 @@
+{% extends "afterloginbase.html" %}
+{% block title %}Grumblr - global stream{% endblock %}
+{% block nav %}
+
+<li><a href="{% url 'global' %}">Global</a></li>
+<li><a href="{% url 'following' %}">Following</a></li>
+<li><a href="{% url 'homepage' user.username %}">Homepage</a></li>
+{% endblock %}
+{% block jumbotron %}
+<div class="jumbotron">
+  <div class="container">
+    {% for pro in profile %}
+    <h2 class="display-3">{{pro.user.username}}</h2>
+    <label class="leading">Welcome to the space of {{pro.user.username}}!</label>
+    <form class="form-signin" action="{% url 'homepage' pro.user.username %}" method="POST">
+      {% if unfollow %}
+      <button class="btn btn-lg btn-default" name="btn-unfollow" value="btn-unfollow">Unfollow</button>
+      {% endif %}
+      {% if follow %}
+      <button class="btn btn-lg btn-default" name="btn-follow" value="btn-follow">Follow</button>
+      {% endif %}
+      {% csrf_token %}
+    </form>
+    {% endfor %}
+    <hr class="m-y-2">
+  </div>
+</div>
+{% endblock %}
+{% block content%}
+    <div class="col-sm-4 col-sm-offset-1">
+      <div class = "well">
+        {% for pro in profile %}
+
+        <h1 align="center">Profile</h1>
+
+        <table align="center">
+          <th colspan="2" align="center"><img class="img-circle" src="{% url 'photo' pro.user.username %}" alt="failure" width="150" height="150"></th>
+          <tr><td align="right">Username: </td><td align="left">{{pro.user.username}}</td></tr>
+          <tr><td align="right">First name: </td><td align="left">{{pro.first_name}}</td></tr>
+          <tr><td align="right">Last name: </td><td align="left">{{pro.last_name}}</td></tr>
+          <tr><td align="right">Age: </td><td align="left">{{pro.age}}</td></tr>
+          <tr><td align="right">Short bio: </td><td align="left">{{pro.short_bio}}</td></tr>
+        </table>
+        {% endfor %}
+      </div>
+    </div><!--/.sidebar-offcanvas-->
+    <div class="row">
+        <div class="col-sm-6">
+          <ol id="post-list"></ol>
+        </div>
+      </div>
+      {% endblock %}
+      {% block script %}
+      {% load static %}
+        <script src="{% static 'grumblr/js/homepage.js' %}" type="text/javascript"></script>
+      {% endblock %}

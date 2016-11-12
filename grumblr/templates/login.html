@@ -1,0 +1,24 @@
+{% extends "beforeloginbase.html" %}
+{% block title %}Grumblr - login{% endblock %}
+{% block form %}
+  <form class="form-signin" action="{% url 'auth_views.login' %}" method="POST">
+    
+    <h2 class="form-signin-heading">Welcome back!</h2>
+    <h3 class="form-signin-heading" style = "color:#f75252">{% if form.errors %}Incorrect username and password. Please try again!{% endif %}</h3>
+
+    {{form.username}}
+    {{form.password}}
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="remember-me"> remember me
+      </label>
+    </div>
+    <label><a href="{% url 'forget' %}">Forget Password?</a></label>
+    <label><a href="{% url 'registration' %}">New user? Click here to join us!</a></label>
+    <p class="lead">
+      <button class="btn btn-lg btn-default" name="btn-signin" value="btn-signin">Sign in</button>
+    </p>
+    {% csrf_token %}
+  </form>
+{% endblock %}
