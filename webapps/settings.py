@@ -22,7 +22,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'wr^299+27$&%y28xjvpluz_cobf@h00$)_ek&mus6#gre-+zpn'
+#SECRET_KEY = 'wr^299+27$&%y28xjvpluz_cobf@h00$)_ek&mus6#gre-+zpn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -61,10 +61,10 @@ MIDDLEWARE = [
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'cmu.evelyn.huang@gmail.com'
-EMAIL_HOST_PASSWORD = 'WCZhyt930816'
-DEFAULT_FROM_EMAIL = 'cmu.evelyn.huang@gmail.com'
-SERVER_EMAIL = 'cmu.evelyn.huang@gmail.com'
+# EMAIL_HOST_USER = 'cmu.evelyn.huang@gmail.com'
+# EMAIL_HOST_PASSWORD = 'WCZhyt930816'
+# DEFAULT_FROM_EMAIL = 'cmu.evelyn.huang@gmail.com'
+# SERVER_EMAIL = 'cmu.evelyn.huang@gmail.com'
 
 ROOT_URLCONF = 'webapps.urls'
 
@@ -151,9 +151,9 @@ STATICFILES_DIRS = (
 		    )
 
 #AWS S3
-AWS_STORAGE_BUCKET_NAME = 'yh1-grumblr-media'
-AWS_ACCESS_KEY_ID = 'AKIAJNONL7EBNACKO6LQ'
-AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'yh1-grumblr-media'
+# AWS_ACCESS_KEY_ID = 'AKIAJNONL7EBNACKO6LQ'
+# AWS_SECRET_ACCESS_KEY = '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'
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
 # it simple - just use this domain plus the path. (If this isn't set, things get complicated).
