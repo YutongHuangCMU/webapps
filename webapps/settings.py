@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 #SECRET_KEY = 'wr^299+27$&%y28xjvpluz_cobf@h00$)_ek&mus6#gre-+zpn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0','yh1-webapp.herokuapp.com']
 
